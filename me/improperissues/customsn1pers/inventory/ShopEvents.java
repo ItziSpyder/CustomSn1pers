@@ -30,12 +30,12 @@ public class ShopEvents implements Listener {
         Inventory inv = e.getClickedInventory();
         String title = e.getView().getTitle();
 
-        if (!inv.getType().equals(InventoryType.PLAYER)) {
-            try {
-                ItemStack item = e.getCurrentItem();
-                ItemMeta meta = item.getItemMeta();
-                String display = meta.getDisplayName();
+        try {
+            ItemStack item = e.getCurrentItem();
+            ItemMeta meta = item.getItemMeta();
+            String display = meta.getDisplayName();
 
+            if (!inv.getType().equals(InventoryType.PLAYER)) {
                 if (title.contains("§8>> §7Very Cool Shop")) {
                     e.setCancelled(true);
                     int index = Integer.parseInt(title.substring(29)) - 1;
@@ -76,9 +76,9 @@ public class ShopEvents implements Listener {
                         }
                     }
                 }
-            } catch (NullPointerException exception) {
-                // empty
             }
+        } catch (NullPointerException exception) {
+            // empty
         }
     }
 

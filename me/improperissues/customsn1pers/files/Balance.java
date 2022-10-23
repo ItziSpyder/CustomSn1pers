@@ -59,8 +59,9 @@ public class Balance {
             return "$" + Math.floor(bal/10000D)/100 + "M";
         } else if (bal >= (1000D)) {
             return "$" + Math.floor(bal/10D)/100 + "K";
+        } else {
+            return "$" + Math.floor(bal * 100)/100;
         }
-        return "";
     }
 
     public static void setBal(OfflinePlayer player,double amount) {
