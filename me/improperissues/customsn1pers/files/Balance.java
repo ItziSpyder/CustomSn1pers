@@ -52,15 +52,15 @@ public class Balance {
     public static String getStringBal(OfflinePlayer player) {
         double bal = getBal(player);
         if (bal >= (1000000000000D)) {
-            return "$" + Math.floor(bal/10000000000D)/100 + "T";
+            return Math.floor(bal/10000000000D)/100 + "T";
         } else if (bal >= (1000000000D)) {
-            return "$" + Math.floor(bal/10000000D)/100 + "B";
+            return Math.floor(bal/10000000D)/100 + "B";
         } else if (bal >= (1000000D)) {
-            return "$" + Math.floor(bal/10000D)/100 + "M";
+            return Math.floor(bal/10000D)/100 + "M";
         } else if (bal >= (1000D)) {
-            return "$" + Math.floor(bal/10D)/100 + "K";
+            return Math.floor(bal/10D)/100 + "K";
         } else {
-            return "$" + Math.floor(bal * 100)/100;
+            return Math.floor(bal * 100)/100 + "";
         }
     }
 

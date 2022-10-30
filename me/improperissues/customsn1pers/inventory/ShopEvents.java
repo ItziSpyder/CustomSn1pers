@@ -17,6 +17,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ShopEvents implements Listener {
@@ -93,7 +95,14 @@ public class ShopEvents implements Listener {
 
         ItemStack bal = new ItemStack(Material.KNOWLEDGE_BOOK);
         ItemMeta balM = bal.getItemMeta();
-        balM.setDisplayName("§7Your Balance: §a" + Balance.getStringBal(Bukkit.getOfflinePlayer(player.getUniqueId())));
+        balM.setDisplayName("§7Your Balance: §6" + Balance.getStringBal(Bukkit.getOfflinePlayer(player.getUniqueId())) + " §eⓒ");
+        balM.setLore(new ArrayList<>(Arrays.asList(
+                "§7Land shots to get money",
+                "§7Headshots give more money",
+                "§7To start, check for free guns",
+                "§7to buy first, if none, contact",
+                "§7an admin to create a free gun!"
+        )));
         bal.setItemMeta(balM);
 
         ItemStack[] contents = {
@@ -114,7 +123,7 @@ public class ShopEvents implements Listener {
             List<String> lore = item.getItemMeta().getLore();
             assert lore != null;
             for (String string : lore) {
-                if (string.contains("§7Price: §a$")) {
+                if (string.contains("§7Price: §6")) {
                     return true;
                 }
             }

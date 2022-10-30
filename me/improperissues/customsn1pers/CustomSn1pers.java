@@ -7,6 +7,7 @@ import me.improperissues.customsn1pers.files.Balance;
 import me.improperissues.customsn1pers.files.Shop;
 import me.improperissues.customsn1pers.inventory.ShopEvents;
 import me.improperissues.customsn1pers.items.ItemManger;
+import me.improperissues.customsn1pers.items.Launch;
 import me.improperissues.customsn1pers.items.Raycast;
 import me.improperissues.customsn1pers.other.Sounds;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -31,6 +32,8 @@ public final class CustomSn1pers extends JavaPlugin {
         // Commands
         getCommand("creategun").setExecutor(new Commands(this));
         getCommand("creategun").setTabCompleter(new Tabs());
+        getCommand("createexplosive").setExecutor(new Commands(this));
+        getCommand("createexplosive").setTabCompleter(new Tabs());
         getCommand("guns").setExecutor(new Commands(this));
         getCommand("shelf").setExecutor(new Commands(this));
         getCommand("shelf").setTabCompleter(new Tabs());
@@ -39,6 +42,7 @@ public final class CustomSn1pers extends JavaPlugin {
         // Events
         getServer().getPluginManager().registerEvents(new PlayerEvents(),this);
         getServer().getPluginManager().registerEvents(new Raycast(this),this);
+        getServer().getPluginManager().registerEvents(new Launch(this),this);
         getServer().getPluginManager().registerEvents(new Sounds(this),this);
         getServer().getPluginManager().registerEvents(new ShopEvents(),this);
 

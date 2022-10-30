@@ -15,7 +15,7 @@ import java.util.Objects;
 
 public class FireArms {
 
-    public static ItemStack createGun(Material itemMaterial, String displayName, int ammo, int maxAmmo, double range, double damage, int fireCooldown) {
+    public static ItemStack createGun(Material itemMaterial, String displayName, int ammo, int maxAmmo, double range, double damage, int fireCooldown, double uncertaincy, int bulletsPerShot) {
         ItemStack item = new ItemStack(itemMaterial);
         ItemMeta meta = item.getItemMeta();
 
@@ -26,6 +26,8 @@ public class FireArms {
                 "§7Range: §f" + range,
                 "§7Damage: §f" + damage,
                 "§7Fire cooldown: §f" + fireCooldown,
+                "§7Bullets Per Shot: §f" + bulletsPerShot,
+                "§7Uncertaincy: §f" + uncertaincy,
                 "   ",
                 "§8#customsn1pers"
         )));
@@ -43,6 +45,8 @@ public class FireArms {
         double range = FireArms.getRange(gunItem);
         double damage = FireArms.getDamage(gunItem);
         int cooldown = FireArms.getFireRate(gunItem);
+        double uncertaincy = FireArms.getUncertaincy(gunItem);
+        int bulletsPerShot = FireArms.getBulletsPerShot(gunItem);
 
         ItemMeta meta = gunItem.getItemMeta();
         meta.setLore(new ArrayList<>(Arrays.asList(
@@ -50,10 +54,36 @@ public class FireArms {
                 "§7Range: §f" + range,
                 "§7Damage: §f" + damage,
                 "§7Fire cooldown: §f" + cooldown,
+                "§7Bullets Per Shot: §f" + bulletsPerShot,
+                "§7Uncertaincy: §f" + uncertaincy,
                 "   ",
                 "§8#customsn1pers"
         )));
         gunItem.setItemMeta(meta);
+    }
+
+    public static int getBulletsPerShot(ItemStack gunItem) {
+        try {
+            List<String> lore = Objects.requireNonNull(gunItem.getItemMeta()).getLore();
+            assert lore != null;
+            String bulletsPerShot = lore.get(4).substring(22);
+
+            return Integer.parseInt(bulletsPerShot);
+        } catch (NullPointerException exception) {
+            return 0;
+        }
+    }
+
+    public static double getUncertaincy(ItemStack gunItem) {
+        try {
+            List<String> lore = Objects.requireNonNull(gunItem.getItemMeta()).getLore();
+            assert lore != null;
+            String uncertaincy = lore.get(5).substring(17);
+
+            return Double.parseDouble(uncertaincy);
+        } catch (NullPointerException exception) {
+            return 0;
+        }
     }
 
     public static int getFireRate(ItemStack gunItem) {

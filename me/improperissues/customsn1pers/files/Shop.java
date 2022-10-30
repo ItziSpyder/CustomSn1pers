@@ -66,7 +66,7 @@ public class Shop {
         ItemMeta meta = item.getItemMeta();
         String display = meta.getDisplayName();
         List<String> lore = meta.getLore();
-        lore.add("§7Price: §a$" + price);
+        lore.add("§7Price: §6" + price + " §eⓒ");
         meta.setLore(lore);
         shelfing.setItemMeta(meta);
         data.set("server.shopitems." + display + ".price",price);
