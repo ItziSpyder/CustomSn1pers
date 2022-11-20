@@ -112,6 +112,67 @@ public class Commands implements CommandExecutor {
                         p.sendMessage("§8>> §cIncomplete or invalid command!");
                     }
                     return true;
+                case "custommodeldata":
+                    if (args.length >= 2) {
+                        switch (args[0].toLowerCase().trim()) {
+                            case "set":
+                                try {
+                                    ItemStack item = p.getInventory().getItemInMainHand();
+                                    if (item.getType().equals(Material.AIR)) {
+                                        p.sendMessage("§8>> §cThis item does not support custom model data!");
+                                    } else {
+                                        int customModelData = Integer.parseInt(args[1]);
+                                        ItemMeta meta = item.getItemMeta();
+                                        meta.setCustomModelData(customModelData);
+                                        item.setItemMeta(meta);
+                                        p.sendMessage("§8>> §7Set this item's custom model data to: §f" + customModelData);
+                                    }
+                                } catch (NullPointerException | IllegalArgumentException exception) {
+                                    p.sendMessage("§8>> §cA problem occurred performing this task, please check your command!");
+                                }
+                                break;
+                        }
+                    } else if (args.length == 1) {
+                        switch (args[0].toLowerCase().trim()) {
+                            case "get":
+                                try {
+                                    ItemStack item = p.getInventory().getItemInMainHand();
+                                    if (item.getType().equals(Material.AIR)) {
+                                        p.sendMessage("§8>> §cThis item does not support custom model data!");
+                                    } else {
+                                        ItemMeta meta = item.getItemMeta();
+                                        assert meta != null;
+                                        if (!meta.hasCustomModelData()) {
+                                            p.sendMessage("§8>> §cThis item does not have custom model data!");
+                                            return true;
+                                        }
+                                        int customModelData = meta.getCustomModelData();
+                                        p.sendMessage("§8>> §7This item's custom model data: §f" + customModelData);
+                                    }
+                                } catch (NullPointerException | IllegalArgumentException exception) {
+                                    p.sendMessage("§8>> §cA problem occurred performing this task, please check your command!");
+                                }
+                                break;
+                            case "remove":
+                                try {
+                                    ItemStack item = p.getInventory().getItemInMainHand();
+                                    if (item.getType().equals(Material.AIR)) {
+                                        p.sendMessage("§8>> §cThis item does not support custom model data!");
+                                    } else {
+                                        ItemMeta meta = item.getItemMeta();
+                                        meta.setCustomModelData(null);
+                                        item.setItemMeta(meta);
+                                        p.sendMessage("§8>> §7Removed this item's custom model data");
+                                    }
+                                } catch (NullPointerException | IllegalArgumentException exception) {
+                                    p.sendMessage("§8>> §cA problem occurred performing this task, please check your command!");
+                                }
+                                break;
+                        }
+                    } else {
+                        p.sendMessage("§8>> §cIncomplete or invalid command!");
+                    }
+                    return true;
             }
         } catch (NullPointerException | ClassCastException | IllegalArgumentException exception) {
             sender.sendMessage("§8>> §cIncomplete or invalid command!");

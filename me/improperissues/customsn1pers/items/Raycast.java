@@ -67,8 +67,8 @@ public class Raycast implements Listener {
                         double distanceToHead = newLoc.distanceSquared(((LivingEntity) entity).getEyeLocation());
                         if (distanceToHead < 1.2) {
                             damage *= 1.2;
-                            message = "§8>> §cHead Shot  §8<< §6+0.3 §eⓒ";
-                            Balance.setBal(player,Balance.getBal(player) + 0.3);
+                            message = "§8>> §cHead Shot  §8<< §6+0.6 §eⓒ";
+                            Balance.setBal(player,Balance.getBal(player) + 0.6);
                             player.playSound(player.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 0.5F);
                         } else {
                             message = "§6+0.1 §eⓒ";
@@ -77,8 +77,13 @@ public class Raycast implements Listener {
                         }
                         ((LivingEntity) entity).damage(damage, player);
                         if (entity.isDead()) {
-                            message += " §6+1.0 §eⓒ";
-                            Balance.setBal(player,Balance.getBal(player) + 1);
+                            if (entity instanceof Player) {
+                                message += " §6+7.0 §eⓒ";
+                                Balance.setBal(player,Balance.getBal(player) + 7);
+                            } else {
+                                message += " §6+3.0 §eⓒ";
+                                Balance.setBal(player,Balance.getBal(player) + 3);
+                            }
                         }
                         Particle.DustOptions dust = new Particle.DustOptions(Color.RED, 3);
                         entity.getWorld().spawnParticle(Particle.REDSTONE, entity.getLocation().add(0, 1, 0), 1, 0.5, 0.5, 0.5, 0, dust);

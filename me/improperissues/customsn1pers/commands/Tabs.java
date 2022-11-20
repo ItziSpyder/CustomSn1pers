@@ -97,6 +97,26 @@ public class Tabs implements TabCompleter {
                         break;
                 }
                 break;
+            case "custommodeldata":
+                switch (args.length) {
+                    case 1:
+                        list.add("set");
+                        list.add("get");
+                        list.add("remove");
+                        break;
+                    case 2:
+                        switch (args[0].toLowerCase().trim()) {
+                            case "set":
+                                StringBuilder builder = new StringBuilder();
+                                for (int i = 0; i < 6; i ++) {
+                                    builder.append(ranSing());
+                                }
+                                list.add(String.valueOf(builder));
+                                break;
+                        }
+                        break;
+                }
+                break;
         }
 
         return list;
@@ -113,5 +133,9 @@ public class Tabs implements TabCompleter {
                 name.contains("_hoe") ||
                 name.contains("_axe")) &&
                 !name.contains("legacy_");
+    }
+
+    public static int ranSing() {
+        return (int) Math.floor(Math.random() * 10);
     }
 }

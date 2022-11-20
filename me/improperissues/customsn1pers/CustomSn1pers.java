@@ -39,6 +39,8 @@ public final class CustomSn1pers extends JavaPlugin {
         getCommand("shelf").setTabCompleter(new Tabs());
         getCommand("unshelf").setExecutor(new Commands(this));
         getCommand("unshelf").setTabCompleter(new Tabs());
+        getCommand("custommodeldata").setExecutor(new Commands(this));
+        getCommand("custommodeldata").setTabCompleter(new Tabs());
         // Events
         getServer().getPluginManager().registerEvents(new PlayerEvents(),this);
         getServer().getPluginManager().registerEvents(new Raycast(this),this);
