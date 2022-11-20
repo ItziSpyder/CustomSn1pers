@@ -60,9 +60,9 @@ public class ShopEvents implements Listener {
                         if (bal >= price) {
                             Balance.setBal(player,bal - price);
                             Balance.save();
-                            ItemStack buy = new ItemStack(item.getType());
+                            ItemStack buy = new ItemStack(item.getType(),item.getAmount());
                             buy.setItemMeta(item.getItemMeta());
-                            removePriceTag(buy);
+                            buy = removePriceTag(buy);
                             Inventory pinv = p.getInventory();
                             p.playSound(p.getLocation(),Sound.ENTITY_PLAYER_LEVELUP,10,10);
                             if (pinv.firstEmpty() != -1) {
@@ -133,18 +133,20 @@ public class ShopEvents implements Listener {
         }
     }
 
-    public static void removePriceTag(ItemStack item) {
+    public static ItemStack removePriceTag(ItemStack item) {
         try {
             if (isSellable(item)) {
                 ItemMeta meta = item.getItemMeta();
                 List<String> lore = meta.getLore();
                 assert lore != null;
-                lore.removeIf(string-> string.contains("§7Price: §a$"));
+                lore.removeIf(string-> string.contains("§7Price:"));
                 meta.setLore(lore);
                 item.setItemMeta(meta);
+                return item;
             }
+            return item;
         } catch (NullPointerException exception) {
-            // empty
+            return item;
         }
     }
 }

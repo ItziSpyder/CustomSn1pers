@@ -62,7 +62,7 @@ public class Shop {
     }
 
     public static void shelf(ItemStack item, double price) {
-        ItemStack shelfing = new ItemStack(item.getType());
+        ItemStack shelfing = new ItemStack(item.getType(), item.getAmount());
         ItemMeta meta = item.getItemMeta();
         String display = meta.getDisplayName();
         List<String> lore = meta.getLore();
